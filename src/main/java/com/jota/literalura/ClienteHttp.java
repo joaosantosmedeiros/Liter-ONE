@@ -18,7 +18,12 @@ public class ClienteHttp {
         HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(uri)).build();
         HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
-        return gson.fromJson(httpResponse.body(), GutendexResponse.class).getResults()[0];
+        Livro[] livros = gson.fromJson(httpResponse.body(), GutendexResponse.class).getResults();
+        if(livros.length >= 1){
+            return livros[0];
+        }
+
+        return null;
     }
 
 }
