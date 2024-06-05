@@ -1,12 +1,23 @@
 package com.jota.literalura;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class Livro {
     private String title;
     private String[] languages;
     private Integer download_count;
     private Author[] authors;
+
+    public Livro() {
+    }
+
+    public Livro(String title, String[] languages, Integer download_count, Author[] authors) {
+        this.title = title;
+        this.languages = languages;
+        this.download_count = download_count;
+        this.authors = authors;
+    }
 
     public String getTitle() {
         return title;
@@ -40,52 +51,14 @@ public class Livro {
         this.authors = authors;
     }
 
-    @Override
-    public String toString() {
-        return "Livro{" +
-                "title='" + title + '\'' +
-                ", languages=" + Arrays.toString(languages) +
-                ", download_count=" + download_count +
-                ", authors=" + Arrays.toString(authors) +
-                '}';
+    public void exibirLivro() {
+        System.out.println("----- LIVRO -----");
+        System.out.println("Título: " + this.getTitle());
+        System.out.println("Autor: " + Arrays.stream(this.getAuthors()).map(Author::getName).collect(Collectors.joining()));
+        System.out.println("Idioma: " + String.join(", ", this.getLanguages()));
+        System.out.println("Número de downloads: " + this.getDownload_count());
+        System.out.println("-----------------\n");
     }
 }
 
-class Author {
-    private String name;
-    private Integer birth_year;
-    private Integer death_year;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getBirth_year() {
-        return birth_year;
-    }
-
-    public void setBirth_year(Integer birth_year) {
-        this.birth_year = birth_year;
-    }
-
-    public Integer getDeath_year() {
-        return death_year;
-    }
-
-    public void setDeath_year(Integer death_year) {
-        this.death_year = death_year;
-    }
-
-    @Override
-    public String toString() {
-        return "Author{" +
-                "name='" + name + '\'' +
-                ", birth_year=" + birth_year +
-                ", death_year=" + death_year +
-                '}';
-    }
-}
